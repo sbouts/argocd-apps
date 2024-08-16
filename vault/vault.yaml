@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vault
+  namespace: argocd
+spec:
+  source:
+    chart: vault
+    repoURL: https://helm.releases.hashicorp.com
+    targetRevision: 0.28.1
+    helm:
+      releaseName: vault
+      values: |
+        server.dev.enabled: true
+  destination:
+    server: "https://kubernetes.default.svc"
