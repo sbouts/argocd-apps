@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: kustomize-prd
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - git:
+      repoURL: https://github.com/sbouts/argocd-apps.git
+      revision: kustomize
+      directories:
+      - path: 'kustomize/*'
+  template:
+    metadata:
+      name: 'kustomize-{{ index .path.segments 1 }}-prd'
+    spec:
+      project: "default"
+      source:
+        repoURL: https://github.com/sbouts/argocd-apps.git
+        targetRevision: kustomize
+        path: '{{ .path.path }}/overlays/prd'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: 'kustomize-{{ index .path.segments 1 }}-prd'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

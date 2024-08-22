@@ -1,0 +1,54 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: helm-prd
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - matrix:
+      generators:
+        - git:
+            repoURL: https://github.com/sbouts/argocd-apps.git
+            revision: HEAD
+            directories:
+            - path: 'helm/*'
+        - list:
+            elements:
+              # appName must match path in git repo
+              - appName: vault
+                templateOverride: |
+                  ignoreDifferences:
+                    - group: admissionregistration.k8s.io
+                      kind: MutatingWebhookConfiguration
+                      jqPathExpressions:
+                        - .webhooks[]?.clientConfig.caBundle                                
+  template:
+    metadata:
+      name: 'helm-{{ index .path.segments 1 }}-prd'
+    spec:
+      project: "default"
+      source:
+        repoURL: https://github.com/sbouts/argocd-apps.git
+        targetRevision: HEAD
+        path: '{{ .path.path }}'
+        helm:
+          releaseName: "{{ index .path.segments 1 }}"
+          valueFiles:
+            - values-base.yaml
+            - values-prd.yaml
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: 'helm-{{ index .path.segments 1 }}-prd'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+  templatePatch: |
+    {{- if eq .appName (index .path.segments 1) }}
+    spec:
+      {{ .templateOverride }}
+    {{- end }}
