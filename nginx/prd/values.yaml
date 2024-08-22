@@ -1,0 +1,5 @@
+replicaCount: 2
+
+extraEnvVars:
+  - name: LOG_LEVEL
+    value: error
