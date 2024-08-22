@@ -4,6 +4,7 @@ kind: Kustomization
 helmCharts:
   - name: keycloak
     repo: https://charts.bitnami.com/bitnami
+    version: 22.1.2
     releaseName: keycloak
     valuesFile: ../../base/values.yaml
     includeCRDs: true

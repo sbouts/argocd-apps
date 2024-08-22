@@ -1,1 +1,3 @@
-replicaCount: 3
+extraEnvVars:
+  - name: KEYCLOAK_LOG_LEVEL
+    value: INFO

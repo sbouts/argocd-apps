@@ -1,2 +1,3 @@
-keycloak:
-  replicaCount: 2
+extraEnvVars:
+  - name: KEYCLOAK_LOG_LEVEL
+    value: DEBUG
