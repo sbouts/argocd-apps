@@ -1,4 +1,6 @@
 nginx:
+  replicaCount: 1
+
   extraEnvVars:
     - name: LOG_LEVEL
       value: debug
