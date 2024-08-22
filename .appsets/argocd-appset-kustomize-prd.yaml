@@ -19,7 +19,7 @@ spec:
       project: "default"
       source:
         repoURL: https://github.com/sbouts/argocd-apps.git
-        targetRevision: kustomize
+        targetRevision: HEAD
         path: '{{ .path.path }}/overlays/prd'
       destination:
         server: https://kubernetes.default.svc
