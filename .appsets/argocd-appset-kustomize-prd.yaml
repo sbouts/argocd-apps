@@ -9,7 +9,7 @@ spec:
   generators:
   - git:
       repoURL: https://github.com/sbouts/argocd-apps.git
-      revision: kustomize
+      revision: HEAD
       directories:
       - path: 'kustomize/*'
   template:
