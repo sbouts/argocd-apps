@@ -1,3 +1,5 @@
 nginx:
-  service.type: ClusterIP
-  metrics.enabled: true
+  service:
+    type: ClusterIP
+  metrics:
+    enabled: true
