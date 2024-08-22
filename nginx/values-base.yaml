@@ -1,1 +1,2 @@
+service.type: ClusterIP
 metrics.enabled: true
