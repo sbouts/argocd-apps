@@ -1,3 +1,4 @@
-extraEnvVars:
-  - name: LOG_LEVEL
-    value: debug
+nginx:
+  extraEnvVars:
+    - name: LOG_LEVEL
+      value: debug

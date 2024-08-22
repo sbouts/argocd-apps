@@ -1,1 +1,2 @@
-server.dev.enabled: false
+vault:
+  server.dev.enabled: false

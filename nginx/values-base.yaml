@@ -1,2 +1,3 @@
-service.type: ClusterIP
-metrics.enabled: true
+nginx:
+  service.type: ClusterIP
+  metrics.enabled: true

@@ -1,5 +1,6 @@
-replicaCount: 2
+nginx:
+  replicaCount: 2
 
-extraEnvVars:
-  - name: LOG_LEVEL
-    value: error
+  extraEnvVars:
+    - name: LOG_LEVEL
+      value: error
