@@ -5,5 +5,7 @@ helmCharts:
   - name: keycloak
     repo: https://charts.bitnami.com/bitnami
     releaseName: keycloak
-    valuesFile: values.yaml
+    valuesFile: ../../base/values.yaml
     includeCRDs: true
+    additionalValuesFiles:
+      - values.yaml

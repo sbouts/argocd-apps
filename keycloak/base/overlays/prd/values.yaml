@@ -1,2 +1,0 @@
-keycloak:
-  replicaCount: 3
