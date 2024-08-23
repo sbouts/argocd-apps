@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
-    path: kustomize/keycloak/overlays/{{ .env }}
+    path: kustomize/keycloak/overlays/{{ .Values.env }}
   syncPolicy:
     automated:
       prune: false
