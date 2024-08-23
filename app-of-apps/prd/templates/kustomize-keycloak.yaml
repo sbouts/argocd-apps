@@ -7,7 +7,7 @@ metadata:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: kustomize-keycloak-{{ .Values.env }}
+    namespace: aoa-kustomize-keycloak-{{ .Values.env }}
     server: {{ .Values.spec.destination.server }}
   project: default
   source:

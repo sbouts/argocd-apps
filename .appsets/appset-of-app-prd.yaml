@@ -21,7 +21,7 @@ spec:
         path: 'app-of-apps/{{.env}}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: 'app-of-apps-{{ .env }}'
+        namespace: 'argocd'
       syncPolicy:
         automated:
           prune: false
