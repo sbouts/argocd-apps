@@ -10,7 +10,6 @@ spec:
     targetRevision: HEAD
     path: argocd-vault-plugin/helm
     helm:
-      releaseName: "{{ index .path.segments 1 }}"
       valueFiles:
         - values-base.yaml
         - values-prd.yaml
