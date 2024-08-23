@@ -21,6 +21,8 @@ spec:
         repoURL: https://github.com/sbouts/argocd-apps.git
         targetRevision: HEAD
         path: '{{ .path.path }}/overlays/tst'
+        kustomize:
+          namespace: 'kustomize-{{ index .path.segments 1 }}-tst'
       destination:
         server: https://kubernetes.default.svc
         namespace: 'kustomize-{{ index .path.segments 1 }}-tst'
