@@ -1,19 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: helm-nginx-{{ .Values.env }}
+  name: helm-vault-{{ .Values.env }}
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: aoa-helm-nginx-{{ .Values.env }}
+    namespace: aoa-helm-vault-{{ .Values.env }}
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
-    path: helm/nginx
+    path: helm/vault
     helm:
       valueFiles:
         - values-base.yaml
@@ -25,3 +25,8 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+  ignoreDifferences:
+    - group: admissionregistration.k8s.io
+      kind: MutatingWebhookConfiguration
+      jqPathExpressions:
+        - .webhooks[]?.clientConfig.caBundle    
