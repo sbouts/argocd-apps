@@ -1,2 +1,3 @@
-vault:
-  server.dev.enabled: false
+server:
+  livenessProbe:
+    enabled: true
