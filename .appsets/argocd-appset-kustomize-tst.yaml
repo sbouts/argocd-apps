@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: kustomize-prd
+  name: kustomize-tst
   namespace: argocd
 spec:
   goTemplate: true
@@ -14,19 +14,19 @@ spec:
       - path: 'kustomize/*'
   template:
     metadata:
-      name: 'kustomize-{{ index .path.segments 1 }}-prd'
+      name: 'kustomize-{{ index .path.segments 1 }}-tst'
     spec:
       project: "default"
       source:
         repoURL: https://github.com/sbouts/argocd-apps.git
         targetRevision: HEAD
-        path: '{{ .path.path }}/overlays/prd'
+        path: '{{ .path.path }}/overlays/tst'
       destination:
         server: https://kubernetes.default.svc
-        namespace: 'kustomize-{{ index .path.segments 1 }}-prd'
+        namespace: 'kustomize-{{ index .path.segments 1 }}-tst'
       syncPolicy:
         automated:
-          prune: false
-          selfHeal: false
+          prune: true
+          selfHeal: true
         syncOptions:
           - CreateNamespace=true

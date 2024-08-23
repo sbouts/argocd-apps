@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: helm-prd
+  name: helm-tst
   namespace: argocd
 spec:
   goTemplate: true
@@ -26,7 +26,7 @@ spec:
                         - .webhooks[]?.clientConfig.caBundle                                
   template:
     metadata:
-      name: 'helm-{{ index .path.segments 1 }}-prd'
+      name: 'helm-{{ index .path.segments 1 }}-tst'
     spec:
       project: "default"
       source:
@@ -37,14 +37,14 @@ spec:
           releaseName: "{{ index .path.segments 1 }}"
           valueFiles:
             - values-base.yaml
-            - values-prd.yaml
+            - values-tst.yaml
       destination:
         server: https://kubernetes.default.svc
-        namespace: 'helm-{{ index .path.segments 1 }}-prd'
+        namespace: 'helm-{{ index .path.segments 1 }}-tst'
       syncPolicy:
         automated:
-          prune: false
-          selfHeal: false
+          prune: true
+          selfHeal: true
         syncOptions:
           - CreateNamespace=true
   templatePatch: |
