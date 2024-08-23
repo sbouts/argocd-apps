@@ -4,11 +4,17 @@ metadata:
   name: argocd-vault-plugin
   namespace: argocd
 spec:
-  destination:
-    namespace: avp-test
-    server: https://kubernetes.default.svc
   project: default
   source:
     repoURL: https://github.com/sbouts/argocd-apps.git
     targetRevision: HEAD
     path: argocd-vault-plugin/plain
+  destination:
+    namespace: avp-test
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true
