@@ -1,3 +1,4 @@
-server:
-  livenessProbe:
-    enabled: false
+vault:
+  server:
+    livenessProbe:
+      enabled: false
