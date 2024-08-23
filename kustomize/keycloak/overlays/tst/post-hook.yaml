@@ -19,3 +19,5 @@ spec:
             while [ $(curl -sw '%{http_code}' "http://keycloak" -o /dev/null) -ne 200 ]; do
               sleep 15;
             done
+      restartPolicy: Never
+
