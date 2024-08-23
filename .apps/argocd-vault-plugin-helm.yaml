@@ -9,11 +9,16 @@ spec:
     repoURL: https://github.com/sbouts/argocd-apps.git
     targetRevision: HEAD
     path: argocd-vault-plugin/helm
-    helm:
-      valueFiles:
-        - values-base.yaml
-        - values-prd.yaml
-      ignoreMissingValueFiles: true
+    # helm:
+    #   valueFiles:
+    #     - values-base.yaml
+    #     - values-prd.yaml
+    #   ignoreMissingValueFiles: true
+    plugin:
+      name: argocd-vault-plugin-helm
+      env:
+        - name: HELM_ARGS
+          value: -f values-base.yaml
   destination:
     namespace: avp-helm
     server: https://kubernetes.default.svc
