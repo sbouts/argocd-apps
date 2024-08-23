@@ -5,7 +5,6 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    name: 'avp'
     namespace: avp-test
     server: https://kubernetes.default.svc
   project: default
