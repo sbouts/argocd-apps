@@ -17,8 +17,8 @@ spec:
         command:
           - /bin/sh
           - -c
-          - >
-            set -x;
-            while [ $(curl -sw '%{http_code}' "http://keycloak" -o /dev/null) -ne 200 ]; do
-              sleep 15;
+          - |
+            until wget --spider -S "http://keycloak" 2>&1 | grep 'HTTP/1.1 200 OK'; do
+              sleep 5;
+              echo 'Waiting for the keycloak service...';
             done
