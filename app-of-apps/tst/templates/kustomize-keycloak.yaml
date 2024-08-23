@@ -6,9 +6,6 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
-  destination:
-    namespace: aoa-kustomize-keycloak-{{ .Values.env }}
-    server: {{ .Values.spec.destination.server }}
   project: default
   source:
     repoURL: {{ .Values.spec.source.repoURL }}
@@ -16,6 +13,9 @@ spec:
     path: kustomize/keycloak/overlays/{{ .Values.env }}
     kustomize:
       namespace: aoa-kustomize-keycloak-{{ .Values.env }}
+  destination:
+    namespace: aoa-kustomize-keycloak-{{ .Values.env }}
+    server: {{ .Values.spec.destination.server }}
   syncPolicy:
     automated:
       prune: true
