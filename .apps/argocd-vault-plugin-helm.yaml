@@ -1,16 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-vault-plugin-plain
+  name: argocd-vault-plugin-helm
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/sbouts/argocd-apps.git
     targetRevision: HEAD
-    path: argocd-vault-plugin/plain
+    path: argocd-vault-plugin/helm
+    helm:
+      releaseName: "{{ index .path.segments 1 }}"
+      valueFiles:
+        - values-base.yaml
+        - values-prd.yaml
+      ignoreMissingValueFiles: true
   destination:
-    namespace: avp-plain
+    namespace: avp-helm
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
