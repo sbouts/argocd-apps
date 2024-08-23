@@ -1,3 +1,8 @@
 extraEnvVars:
   - name: KEYCLOAK_LOG_LEVEL
     value: DEBUG
+auth:
+  adminPassword: test1234
+postgresql:
+  auth:
+    password: test1234
