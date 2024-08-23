@@ -6,8 +6,11 @@ metadata:
     argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
 spec:
+  backoffLimit: 2
+  activeDeadlineSeconds: 120
   template:
     spec:
+      restartPolicy: Never
       containers:
       - name: healthcheck
         image: busybox
@@ -19,5 +22,3 @@ spec:
             while [ $(curl -sw '%{http_code}' "http://keycloak" -o /dev/null) -ne 200 ]; do
               sleep 15;
             done
-      restartPolicy: Never
-
