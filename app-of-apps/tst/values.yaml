@@ -1,0 +1,7 @@
+env: tst
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/sbouts/argocd-apps.git
+    targetRevision: HEAD
