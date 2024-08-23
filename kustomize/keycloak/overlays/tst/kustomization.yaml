@@ -10,3 +10,6 @@ helmCharts:
     includeCRDs: true
     additionalValuesFiles:
       - values.yaml
+
+resources:
+- post-hook.yaml

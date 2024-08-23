@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: keycloak-health-check-
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    # argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      containers:
+      - name: healthcheck
+        image: busybox
+        command:
+          - /bin/sh
+          - -c
+          - >
+            set -x;
+            while [ $(curl -sw '%{http_code}' "http://keycloak" -o /dev/null) -ne 200 ]; do
+              sleep 15;
+            done
+        restartPolicy: Never
+  backoffLimit: 2
