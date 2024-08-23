@@ -18,7 +18,7 @@ spec:
       valueFiles:
         - values-base.yaml
         - values-{{ .Values.env }}.yaml
-    ignoreMissingValueFiles: true
+      ignoreMissingValueFiles: true
   syncPolicy:
     automated:
       prune: true
