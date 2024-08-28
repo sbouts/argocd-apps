@@ -9,8 +9,9 @@ spec:
     repoURL: https://github.com/sbouts/argocd-apps.git
     targetRevision: HEAD
     path: argocd-vault-plugin/kustomize/overlays/tst
+    plugin:
+      name: argocd-vault-plugin-kustomize
   destination:
-    namespace: avp-kustomize
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:

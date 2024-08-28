@@ -8,5 +8,6 @@ helmCharts:
     releaseName: keycloak
     valuesFile: ../../base/values.yaml
     includeCRDs: true
+    namespace: avp-kustomize-prd
     additionalValuesFiles:
       - values.yaml
