@@ -1,0 +1,8 @@
+extraEnvVars:
+  - name: KEYCLOAK_LOG_LEVEL
+    value: DEBUG
+auth:
+  adminPassword: <path:avp/data/tst/keycloak#password>
+postgresql:
+  auth:
+    password: <path:avp/data/tst/postgres#password>

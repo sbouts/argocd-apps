@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-vault-plugin-kustomize
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/sbouts/argocd-apps.git
+    targetRevision: HEAD
+    path: argocd-vault-plugin/kustomize/overlays/tst
+  destination:
+    namespace: avp-kustomize
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
