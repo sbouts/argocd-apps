@@ -12,6 +12,7 @@ spec:
     plugin:
       name: argocd-vault-plugin-kustomize
   destination:
+    namespace: avp-kustomize-tst
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
